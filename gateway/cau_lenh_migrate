@@ -1,0 +1,37 @@
+Đầu tiên cần cài đặt thêm 2 cái để truy cập database: 
+aerich
+asyncpg
+
+b1:
+aerich init -t migrations.settings
+
+b2:
+aerich init-db
+
+b3:
+...
+Khi cần thay đổi (có thêm hoặc thay đổi model), dùng lệnh: 
+aerich migrate
+aerich upgrade
+
+
+Kết quả:
+(env) E:\Desktop\HTTM-BTL\FastAPI_OpenCV\fastapi-jwt>aerich init -t migrations.settings
+Success create migrate location ./migrations
+Success write config to pyproject.toml
+
+(env) E:\Desktop\HTTM-BTL\FastAPI_OpenCV\fastapi-jwt>aerich init-db
+Success create app migrate location migrations\models
+Success generate schema for app "models"
+
+Tham khảo:
+https://www.youtube.com/watch?v=LgFxZhdhgeg
+
+Đoạn 00:05:19 - Intial DB Migration
+
+
+e:
+cd E:\Desktop\HTTM-BTL\FastAPI_OpenCV
+.\env\Scripts\activate
+cd fastapi-jwt
+python main.py
