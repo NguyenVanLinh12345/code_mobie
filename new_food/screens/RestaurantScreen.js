@@ -1,6 +1,6 @@
 import { View, Text, ScrollView, Image, TouchableOpacity, Modal } from "react-native";
 import React, { useEffect, useLayoutEffect, useState } from "react";
-import { ArrowLeftIcon, ChatBubbleOvalLeftEllipsisIcon, LinkIcon, MapPinIcon, ShareIcon, StarIcon, TagIcon, XMarkIcon, } from "react-native-heroicons/solid";
+import { ArrowLeftIcon, ChatBubbleOvalLeftEllipsisIcon, CheckBadgeIcon, LinkIcon, MapPinIcon, ShareIcon, StarIcon, TagIcon, XMarkIcon, } from "react-native-heroicons/solid";
 import DishRow from "../components/DishRow";
 import BasketContainer from "../components/BasketContainer";
 import { useDispatch } from "react-redux";
@@ -39,6 +39,12 @@ const RestaurantScreen = ({ route, navigation }) => {
               <ShareIcon
                 size={20} color="#00ccbb"
               />
+            </TouchableOpacity>
+          </View>
+
+          <View className="absolute right-28 p-2 top-14 bg-white rounded-full">
+            <TouchableOpacity onPress={() => { navigation.navigate("ListReview", { resId: id }) }}>
+              <CheckBadgeIcon size={20} color="#00ccbb" />
             </TouchableOpacity>
           </View>
 

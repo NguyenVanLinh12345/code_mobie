@@ -10,6 +10,7 @@ function OrderListScreen({ navigation }) {
     fetch(api.resGetAllOrder + "123456")
       .then(res => res.json())
       .then(data => {
+        // console.log(data[0].resId)
         setOrders(data);
       })
       .catch(error => {
@@ -22,13 +23,14 @@ function OrderListScreen({ navigation }) {
       {/* Nút quay lại */}
       <View className="relative p-6 bg-white">
         <TouchableOpacity
-          className="absolute top-6 left-5 p-2 bg-mainBlue rounded-full"
+          className="absolute top-6 left-5"
           onPress={() => {
-            console.log("ve home");
-            navigation.navigate("Home")
+            navigation.navigate("Home");
           }}
         >
-          <ArrowLeftIcon size={20} color="white" />
+          <View className="p-2 bg-mainBlue rounded-full">
+            <ArrowLeftIcon size={20} color="white" />
+          </View>
         </TouchableOpacity>
         <View>
           <Text className="text-center text-xl font-semibold">Danh sách đơn đặt hàng</Text>
@@ -40,7 +42,7 @@ function OrderListScreen({ navigation }) {
         <ScrollView>
           {
             orders.map(value => (
-              <ResOrderItem orderId={value._id} state={value.state} key={value._id} name={value.userName} address={value.address} orders={value.items} />
+              <ResOrderItem resId={value.resId} orderId={value._id} state={value.state} key={value._id} name={value.userName} address={value.address} orders={value.items} />
             ))
           }
         </ScrollView>

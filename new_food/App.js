@@ -18,6 +18,7 @@ import RestaurantHomeScreen from "./screens/restaurant/RestaurantHomeScreen";
 import PeriodicDishScreen from "./screens/customer/PeriodicDishScreen";
 import RestaurantChatScreen from "./screens/restaurant/RestaurantChatScreen";
 import CustomerChatScreen from "./screens/customer/CustomerChatScreen";
+import ListReview from "./screens/customer/ListReview";
 
 const Stack = createNativeStackNavigator();
 
@@ -42,6 +43,7 @@ export default function App() {
             <Stack.Screen name="RestaurantChat" component={RestaurantChatScreen} />
             <Stack.Screen name="PeriodicDish" options={{ headerShown: false }} component={PeriodicDishScreen} />
             <Stack.Screen name="CustomerChat" component={CustomerChatScreen} />
+            <Stack.Screen name="ListReview" options={{ headerShown: false }} component={ListReview} />
           </Stack.Navigator>
         </TailwindProvider>
       </Provider>
