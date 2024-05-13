@@ -30,8 +30,8 @@ https://www.youtube.com/watch?v=LgFxZhdhgeg
 Đoạn 00:05:19 - Intial DB Migration
 
 
-e:
-cd E:\Desktop\HTTM-BTL\FastAPI_OpenCV
+d:
+cd D:\code_mobie
 .\env\Scripts\activate
-cd fastapi-jwt
+cd gateway
 python main.py

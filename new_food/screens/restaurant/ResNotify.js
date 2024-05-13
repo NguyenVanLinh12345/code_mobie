@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import NotifyItem from "../../components/NofifyItem";
 import {api} from '../../services/api';
 
-function ResNotify({ navigation }) {
+function ResNotify() {
     const [notifys, setNotifys] = useState([]);
 
     useEffect(()=>{

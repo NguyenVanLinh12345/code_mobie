@@ -1,7 +1,7 @@
 import { ScrollView, Text, View } from "react-native";
-import ResOrderItem from '../../components/restaurant/ResOrderItem';
 import { useEffect, useState } from "react";
 import { api } from "../../services/api";
+import ResOrderForRes from "../../components/restaurant/ResOrderForRes";
 
 function RestaurantOrder() {
     const [orders, setOrders] = useState([]);
@@ -27,7 +27,7 @@ function RestaurantOrder() {
                 <ScrollView>
                     {
                         orders.map(value => (
-                            <ResOrderItem orderId={value._id} state={value.state} key={value._id} name={value.userName} address={value.address} orders={value.items} />
+                            <ResOrderForRes orderId={value._id} state={value.state} key={value._id} name={value.userName} address={value.address} orders={value.items} />
                         ))
                     }
                 </ScrollView>

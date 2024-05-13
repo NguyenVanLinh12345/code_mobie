@@ -3,13 +3,15 @@ import { api } from "../../services/api"
 import { useState } from "react"
 import { TextInput } from "react-native-gesture-handler";
 import { StarIcon } from "react-native-heroicons/solid";
+import { useSelector } from "react-redux";
 
+import { selectAuth } from "../../slices/authslide";
 function ResOrderItem({ orderId = "", orders = [], name, address, state = 1, resId }) {
-    // state = 4;
+    const authState = useSelector(selectAuth);
     const [myState, setMyState] = useState(state);
     const [review, setReview] = useState("");
     const [rate, setRate] = useState(5);
-    const [reviewSuccess, setReviewSuccess] = useState(state === 6);
+    const [reviewSuccess, setReviewSuccess] = useState(state === 4);
 
     const changeState = (newState) => {
         fetch(api.reschangeStateOrder + orderId, {
@@ -17,6 +19,11 @@ function ResOrderItem({ orderId = "", orders = [], name, address, state = 1, res
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ state: newState })
         })
+        .then(res => res.json())
+        .then(data => {
+            setMyState(4);
+        })
+        .catch(error => console.log(error))
     }
 
     const getOrderState = () => {
@@ -26,12 +33,13 @@ function ResOrderItem({ orderId = "", orders = [], name, address, state = 1, res
         if (state === 3) return "Đã giao hàng";
         if (state === 4) return "Đã nhận được hàng";
         if (state === 5) return "Đã hủy";
+        if (state === 6) return "Đã nhận xét";
         return "Không xác định"
     }
 
     const sendReview = () => {
         const reivewSend = {
-            name: "Nguyễn Thành Công",
+            name: authState.name,
             rate: rate,
             date: new Date(),
             review: review,
@@ -45,8 +53,7 @@ function ResOrderItem({ orderId = "", orders = [], name, address, state = 1, res
         })
             .then(res => res.json())
             .then(data => {
-                // console.log(data);
-                setReviewSuccess(true);
+                setReviewSuccess(false); // Đặt bằng false để ẩn nhận xét đi
                 changeState(6); // Đặt trạng thái là đã nhận xét
             })
             .catch(error => console.log(error))
@@ -81,33 +88,47 @@ function ResOrderItem({ orderId = "", orders = [], name, address, state = 1, res
                     ))
                 }
             </View>
-            <View className="mt-4">
-                <View className="mb-2 flex-row">
-                    <Text>Số sao | </Text>
-                    <TouchableOpacity onPress={() => setRate(1)}>
-                        <StarIcon color={rate > 0 ? "orange" : "gray"} size={18} />
-                    </TouchableOpacity>
-                    <TouchableOpacity onPress={() => setRate(2)}>
-                        <StarIcon color={rate > 1 ? "orange" : "gray"} size={18} />
-                    </TouchableOpacity>
-                    <TouchableOpacity onPress={() => setRate(3)}>
-                        <StarIcon color={rate > 2 ? "orange" : "gray"} size={18} />
-                    </TouchableOpacity>
-                    <TouchableOpacity onPress={() => setRate(4)}>
-                        <StarIcon color={rate > 3 ? "orange" : "gray"} size={18} />
-                    </TouchableOpacity>
-                    <TouchableOpacity onPress={() => setRate(5)}>
-                        <StarIcon color={rate > 4 ? "orange" : "gray"} size={18} />
+            {
+                myState === 3 && !reviewSuccess
+                &&
+                <View>
+                    <TouchableOpacity
+                        onPress={() => {
+                            changeState(4);
+                            setReviewSuccess(true);
+                        }}>
+                        <Text className="p-1 rounded flex-row self-start mt-2" style={{backgroundColor: 'orange'}}>Đã nhận được hàng</Text>
                     </TouchableOpacity>
                 </View>
-                {
-                    reviewSuccess
-                        ?
-                        <View></View>
-                        :
+            }
+
+            {
+                reviewSuccess
+                    ?
+                    <View className="mt-4">
+                        <View className="mb-2 flex-row">
+                            <Text>Số sao | </Text>
+                            <TouchableOpacity onPress={() => setRate(1)}>
+                                <StarIcon color={rate > 0 ? "orange" : "gray"} size={18} />
+                            </TouchableOpacity>
+                            <TouchableOpacity onPress={() => setRate(2)}>
+                                <StarIcon color={rate > 1 ? "orange" : "gray"} size={18} />
+                            </TouchableOpacity>
+                            <TouchableOpacity onPress={() => setRate(3)}>
+                                <StarIcon color={rate > 2 ? "orange" : "gray"} size={18} />
+                            </TouchableOpacity>
+                            <TouchableOpacity onPress={() => setRate(4)}>
+                                <StarIcon color={rate > 3 ? "orange" : "gray"} size={18} />
+                            </TouchableOpacity>
+                            <TouchableOpacity onPress={() => setRate(5)}>
+                                <StarIcon color={rate > 4 ? "orange" : "gray"} size={18} />
+                            </TouchableOpacity>
+                        </View>
+
                         <View>
                             <TextInput
                                 placeholder="Nhận xét"
+                                style={{ backgroundColor: "lightgray" }}
                                 className="bg-gray-100 p-2 rounded"
                                 value={review}
                                 onChangeText={(text) => setReview(text)} />
@@ -117,8 +138,10 @@ function ResOrderItem({ orderId = "", orders = [], name, address, state = 1, res
                                 <Text className="text-white font-bold">Nhận xét</Text>
                             </TouchableOpacity>
                         </View>
-                }
-            </View>
+                    </View>
+                    :
+                    <View></View>
+            }
         </View>
     )
 }

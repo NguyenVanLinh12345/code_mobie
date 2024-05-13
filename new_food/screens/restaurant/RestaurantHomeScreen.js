@@ -56,7 +56,7 @@ function RestaurantHomeScreen({ route, navigation }) {
                     <Text style={styles.itemText}>Cài đặt</Text>
                 </TouchableOpacity>
 
-                <TouchableOpacity onPress={() => { changeMainView(RestaurantReview) }} style={styles.item}>
+                <TouchableOpacity onPress={() => { changeMainView(<RestaurantReview />) }} style={styles.item}>
                     <NewspaperIcon size={30} color="#00ccbb" />
                     <Text style={styles.itemText}>Nhận xét</Text>
                 </TouchableOpacity>
@@ -66,7 +66,7 @@ function RestaurantHomeScreen({ route, navigation }) {
                     <Text style={styles.itemText}>Ưu Đãi</Text>
                 </TouchableOpacity>
 
-                <TouchableOpacity onPress={() => {changeMainView(<ResNotify />)}} style={styles.item} >
+                <TouchableOpacity onPress={() => {changeMainView(ResNotify)}} style={styles.item} >
                     <BellAlertIcon size={30} color="#00ccbb" />
                     <Text style={styles.itemText}>Thông báo</Text>
                 </TouchableOpacity>

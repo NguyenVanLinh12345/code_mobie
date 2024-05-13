@@ -1,10 +1,15 @@
 const machineIP = "192.168.2.14";
+
+const gatewayBaseAPI = `http://${machineIP}:8000`;
 const reviewBaseAPI = `http://${machineIP}:5001`;
 const productBaseAPI = `http://${machineIP}:5002`;
 const orderBaseAPI = `http://${machineIP}:5003`;
 const notifyBaseAPI = `http://${machineIP}:5004`;
 
 const api = {
+    // login
+    login: `${gatewayBaseAPI}/api/v1/login`,
+    register: `${gatewayBaseAPI}/api/v1/register`,
     // order
     createOrder: `${orderBaseAPI}/api/v1/add-order`,
     reschangeStateOrder: `${orderBaseAPI}/api/v1/orders/state?orderId=`,

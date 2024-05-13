@@ -7,14 +7,37 @@ import {
   TouchableOpacity,
 } from 'react-native';
 
-import { ArrowLeftIcon, AtSymbolIcon, CalendarDaysIcon, LockClosedIcon, UserIcon } from "react-native-heroicons/solid";
+import { AtSymbolIcon, LockClosedIcon, UserIcon } from "react-native-heroicons/solid";
 import InputField from '../components/InputField';
 import CustomButton from '../components/CustomButton';
+import { api } from '../services/api';
 
 function RegisterScreen({ navigation }) {
-  const [date, setDate] = useState(new Date());
-  const [open, setOpen] = useState(false);
-  const [dobLabel, setDobLabel] = useState('Ngày sinh');
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [pass, setPass] = useState("");
+  const [confirm, SetConfirm] = useState("");
+
+  const registerFunc = () => {
+    const dataSend = {
+      email: email,
+      first_name: "",
+      last_name: name,
+      password: pass,
+      role: "customer"
+    }
+    fetch(api.register, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(dataSend)
+    })
+      .then(res => res.json())
+      .then(data => {
+        navigation.navigate("Login");
+      })
+      .catch(error => console.log(error))
+
+  }
 
   return (
     <>
@@ -36,6 +59,8 @@ function RegisterScreen({ navigation }) {
           </Text>
 
           <InputField
+            onChangeTextCallback={setName}
+
             label={'Họ và tên'}
             icon={
               <UserIcon
@@ -48,6 +73,7 @@ function RegisterScreen({ navigation }) {
           />
 
           <InputField
+            onChangeTextCallback={setEmail}
             label={'Email'}
             icon={
               <AtSymbolIcon
@@ -61,6 +87,7 @@ function RegisterScreen({ navigation }) {
           />
 
           <InputField
+            onChangeTextCallback={setPass}
             label={'Mật khẩu'}
             icon={
               <LockClosedIcon
@@ -74,6 +101,7 @@ function RegisterScreen({ navigation }) {
           />
 
           <InputField
+            onChangeTextCallback={SetConfirm}
             label={'Nhâp lại mật khẩu'}
             icon={
               <LockClosedIcon
@@ -86,7 +114,7 @@ function RegisterScreen({ navigation }) {
             inputType="password"
           />
 
-          <CustomButton label={'Đăng ký'} onPress={() => { }} />
+          <CustomButton label={'Đăng ký'} onPress={registerFunc} />
 
           <View
             style={{

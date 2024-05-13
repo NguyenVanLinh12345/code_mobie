@@ -52,6 +52,7 @@ async def login(body: UserLogin):
     await User.filter(email=body.email).update(**{'refresh_token': refresh_tkn})
 
     return {
+        'id': user.id,
         'message': 'Login Successful',
         'first_name': user.first_name,
         'last_name': user.last_name,

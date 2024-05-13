@@ -5,7 +5,7 @@ import InputField from '../components/InputField';
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { setAuth } from "../slices/authslide";
-
+import { api } from '../services/api';
 // import { useDispatch, useSelector } from "react-redux";
 // import { setAuth, selectAuth } from "../slices/authslide";
 
@@ -20,19 +20,39 @@ function LoginScreen({ route, navigation }) {
     const dispatch = useDispatch();
 
     const loginFunc = () => {
-        const dataRes = {
-            id: 1,
-            name: "Nguyễn Chiến Thắng",
-            accessToken: "actoken",
-            refreshToken: "retoken"
+        const dataSend = {
+            email: email,
+            password: pass
         }
+        // console.log(dataSend, api.login)
+        fetch(api.login, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(dataSend)
+        })
+            .then(res => res.json())
+            .then(data => {
+                const dataRes = {
+                    id: data.id,
+                    name: data.last_name,
+                    accessToken: data.access_token,
+                    refreshToken: data.refresh_token
+                }
+                dispatch(setAuth(dataRes));
+                if (data.role === "customer") {
+                    navigation.navigate("Home");
+                } else {
+                    navigation.navigate("RestaurantHome");
+                }
+            })
+            .catch(error => console.log(error))
 
-        dispatch(setAuth(dataRes))
-        if (email === "0") {
-            navigation.navigate("RestaurantHome");
-        } else if (email === "1") {
-            navigation.navigate("Home");
-        }
+
+        // if (email === "0") {
+        //     navigation.navigate("RestaurantHome");
+        // } else if (email === "1") {
+        //     navigation.navigate("Home");
+        // }
     }
 
     return (

@@ -10,7 +10,8 @@ function FeaturedRow({ title, description, id }) {
   const [restaurants, setRestaurants] = useState([]);
 
   useEffect(() => {
-    setRestaurants(fakedb);
+    const newData = fakedb.filter(value => value.typeId === id)
+    setRestaurants(newData);
   }, [id]);
 
   return (

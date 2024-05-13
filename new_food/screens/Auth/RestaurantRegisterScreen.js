@@ -1,21 +1,44 @@
-import { View, Text, TouchableOpacity, SafeAreaView } from "react-native";
-import { ArrowLeftIcon, AtSymbolIcon, IdentificationIcon, LockClosedIcon, MapPinIcon, PhoneIcon, UserIcon } from "react-native-heroicons/outline";
+import { View, Text, TouchableOpacity, SafeAreaView, ScrollView } from "react-native";
+import { AtSymbolIcon, LockClosedIcon, UserIcon } from "react-native-heroicons/outline";
 import CustomButton from "../../components/CustomButton";
 import InputField from "../../components/InputField";
+import { useState } from "react";
+import { api } from "../../services/api";
 
 const RestaurantRegisterScreen = ({ navigation }) => {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [pass, setPass] = useState("");
+  const [confirm, SetConfirm] = useState("");
+
+  const registerFunc = () => {
+    const dataSend = {
+      email: email,
+      first_name: "",
+      last_name: name,
+      password: pass,
+      role: "restaurant"
+    }
+    fetch(api.register, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(dataSend)
+    })
+      .then(res => res.json())
+      .then(data => {
+        navigation.navigate("Login");
+      })
+      .catch(error => console.log(error))
+
+  }
+
   return (
     <>
-      <View className="relative">
-        <TouchableOpacity
-          className="absolute top-14 left-5 p-2 bg-white rounded-full"
-          onPress={() => navigation.goBack(null)}
-        >
-          <ArrowLeftIcon size={20} color="#00ccbb" />
-        </TouchableOpacity>
-      </View>
-      <SafeAreaView style={{ flex: 1, justifyContent: 'flex-start' }}>
-        <View className="mt-16" style={{ paddingHorizontal: 25 }}>
+      <SafeAreaView style={{ flex: 1, justifyContent: 'center' }}>
+        <ScrollView
+          showsVerticalScrollIndicator={false}
+          style={{ paddingHorizontal: 25 }}>
+
           <Text
             style={{
               textAlign: "center",
@@ -29,6 +52,21 @@ const RestaurantRegisterScreen = ({ navigation }) => {
           </Text>
 
           <InputField
+            onChangeTextCallback={setName}
+
+            label={'Tên nhà hàng'}
+            icon={
+              <UserIcon
+                name="person-outline"
+                size={20}
+                color="#666"
+                style={{ marginRight: 5 }}
+              />
+            }
+          />
+
+          <InputField
+            onChangeTextCallback={setEmail}
             label={'Email'}
             icon={
               <AtSymbolIcon
@@ -42,6 +80,7 @@ const RestaurantRegisterScreen = ({ navigation }) => {
           />
 
           <InputField
+            onChangeTextCallback={setPass}
             label={'Mật khẩu'}
             icon={
               <LockClosedIcon
@@ -52,78 +91,37 @@ const RestaurantRegisterScreen = ({ navigation }) => {
               />
             }
             inputType="password"
-            fieldButtonFunction={() => { }}
           />
 
           <InputField
-            label={'Tên của nhà hàng'}
+            onChangeTextCallback={SetConfirm}
+            label={'Nhâp lại mật khẩu'}
             icon={
-              <UserIcon
+              <LockClosedIcon
                 name="ios-lock-closed-outline"
                 size={20}
                 color="#666"
                 style={{ marginRight: 5 }}
               />
             }
-            fieldButtonFunction={() => { }}
+            inputType="password"
           />
 
-          <InputField
-            label={'Số điện thoại'}
-            icon={
-              <PhoneIcon
-                name="ios-lock-closed-outline"
-                size={20}
-                color="#666"
-                style={{ marginRight: 5 }}
-              />
-            }
-            fieldButtonFunction={() => { }}
-          />
-
-          <InputField
-            label={'Địa chỉ của nhà hàng'}
-            icon={
-              <MapPinIcon
-                name="ios-lock-closed-outline"
-                size={20}
-                color="#666"
-                style={{ marginRight: 5 }}
-              />
-            }
-            fieldButtonFunction={() => { }}
-          />
-
-          <InputField
-            label={'Mô tả'}
-            icon={
-              <IdentificationIcon
-                name="ios-lock-closed-outline"
-                size={20}
-                color="#666"
-                style={{ marginRight: 5 }}
-              />
-            }
-            fieldButtonFunction={() => { }}
-          />
-
-          <CustomButton label={"Đăng ký nhà hàng"} onPress={() => { navigation.navigate("Home")}} />
+          <CustomButton label={'Đăng ký'} onPress={registerFunc} />
 
           <View
             style={{
               flexDirection: 'row',
               justifyContent: 'center',
-              marginBottom: 16,
+              marginBottom: 30,
             }}>
-            <Text>Bạn đã có tài khoản?</Text>
-            <TouchableOpacity
-              className="ml-1"
-              onPress={() => navigation.navigate('Login')}
-            >
-              <Text style={{ color: '#AD40AF', fontWeight: '700' }}>Đăng nhập</Text>
+            <Text>Đã có tài khoản?</Text>
+            <TouchableOpacity onPress={() => navigation.goBack()}>
+              <Text className="font-bold color-mainBlue ml-1">Đăng nhập</Text>
             </TouchableOpacity>
           </View>
-        </View>
+
+        </ScrollView>
       </SafeAreaView>
     </>
   );

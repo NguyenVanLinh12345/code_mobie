@@ -23,7 +23,7 @@ exports.getAllNotifies = async (req, res) => {
   }
 };
 
-// Lấy thông báo theo resId
+// Lấy thông báo theo resId: Nhà hàng (restaurant)
 exports.getNotifiesByResId = async (req, res) => {
     try {
         const { resId } = req.params;
@@ -34,7 +34,7 @@ exports.getNotifiesByResId = async (req, res) => {
     }
 };
 
-// Lấy thông báo theo cusId
+// Lấy thông báo theo cusId: (customer)
 exports.getNotifiesByCusId = async (req, res) => {
     try {
         const { cusId } = req.params;

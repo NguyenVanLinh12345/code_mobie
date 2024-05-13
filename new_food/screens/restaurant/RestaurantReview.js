@@ -1,15 +1,22 @@
-import { Text, View, StyleSheet } from "react-native";
-import { ScrollView } from "react-native-gesture-handler";
+import { Text, View, StyleSheet, ScrollView } from "react-native";
+// import { ScrollView } from "react-native-gesture-handler";
 import ResReview from '../../components/restaurant/ResReview';
-import { useState } from "react";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { api } from '../../services/api';
+
 // Đây là nơi mà người bán sẽ phản hồi người dùng
 function RestaurantReview() {
     const [reviews, setReviews] = useState([]);
-
     useEffect(() => {
-        fetch()
+        fetch(api.getReviewsByRestaurantId + "123456")
+            .then(res => res.json())
+            .then(data => {
+                // console.log(data);
+                setReviews(data);
+            })
+            .catch(error => console.log(error))
     }, [])
+
     // const reviews = [
     //     {
     //         _id: 1,
@@ -28,6 +35,7 @@ function RestaurantReview() {
     //         feedback: "",
     //     }
     // ]
+    // console.log(reviews)
 
     return (
         <View style={styles.RestaurantReview}>
@@ -35,17 +43,18 @@ function RestaurantReview() {
                 <View className="pb-36">
                     <Text className="text-center px-4 pt-6 mb-3 font-bold text-xl">Danh sách nhận xét</Text>
                     {
-                        reviews.map((review) => (
+                        reviews.map(reviewItem => (
                             <ResReview
-                                date={review.date}
-                                feedback={review.feedback}
-                                id={review._id}
-                                name={review.name}
-                                rate={review.rate}
-                                review={review.review}
-                                key={review._id}
+                                date={reviewItem.date}
+                                feedback={reviewItem.feedback}
+                                id={reviewItem._id}
+                                name={reviewItem.name}
+                                rate={reviewItem.rate}
+                                review={reviewItem.review}
+                                key={reviewItem._id}
                             />
-                        ))}
+                        ))
+                    }
                 </View>
             </ScrollView>
         </View>
@@ -57,5 +66,6 @@ export default RestaurantReview;
 const styles = StyleSheet.create({
     RestaurantReview: {
         marginTop: 30,
+        // backgroundColor: "red"
     }
 })

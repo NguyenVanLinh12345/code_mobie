@@ -13,7 +13,7 @@ const RestaurantScreen = ({ route, navigation }) => {
   const dispatch = useDispatch();
   const [dishes, setDishes] = useState([]);
   useEffect(()=>{
-    fetch(api.getDishFromResId + 4)
+    fetch(api.getDishFromResId + id)
     .then(res => res.json())
     .then(data => {
       // console.log(data);
