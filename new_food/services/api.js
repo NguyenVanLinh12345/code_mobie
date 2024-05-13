@@ -1,7 +1,8 @@
 const machineIP = "192.168.2.14";
-const orderBaseAPI = `http://${machineIP}:5003`;
-const productBaseAPI = `http://${machineIP}:5002`;
 const reviewBaseAPI = `http://${machineIP}:5001`;
+const productBaseAPI = `http://${machineIP}:5002`;
+const orderBaseAPI = `http://${machineIP}:5003`;
+const notifyBaseAPI = `http://${machineIP}:5004`;
 
 const api = {
     // order
@@ -17,5 +18,9 @@ const api = {
     getReviewsByRestaurantId: `${reviewBaseAPI}/api/v1/reviews?resId=`,
     addReview: `${reviewBaseAPI}/api/v1/reviews`,
     addFeedbackToReview: `${reviewBaseAPI}/api/v1/reviews/feedback?reviewId=`,
-    }
+
+    // Chức năng thông báo
+    resGetNotify: `${notifyBaseAPI}/api/v1/notifies/resId/6666`,
+    cusGetNotify: `${notifyBaseAPI}/api/v1/notifies/cusId/8888`
+}
 export { api }

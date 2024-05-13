@@ -1,6 +1,6 @@
 import { View, Text, Image, TouchableOpacity } from 'react-native';
 import { SafeAreaView } from "react-native-safe-area-context";
-import { ArrowLeftIcon, HeartIcon, CurrencyDollarIcon, GiftIcon, MapPinIcon, PowerIcon, QuestionMarkCircleIcon } from "react-native-heroicons/solid";
+import { ArrowLeftIcon, HeartIcon, CurrencyDollarIcon, GiftIcon, MapPinIcon, PowerIcon, QuestionMarkCircleIcon, BellAlertIcon } from "react-native-heroicons/solid";
 
 import { useDispatch, useSelector } from "react-redux";
 import { setAuth, selectAuth } from "../slices/authslide";
@@ -45,6 +45,11 @@ const UserprofileScreen = ({ route, navigation }) => {
                 <TouchableOpacity onPress={() => { }} style={{ marginTop: 25, flexDirection: 'row' }}>
                     <CurrencyDollarIcon size={30} color="gray" />
                     <Text className='text-black-700  font-light text-xl' >Xu tích lũy</Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity onPress={() => { navigation.navigate("CusNotify") }} style={{ marginTop: 25, flexDirection: 'row' }} >
+                    <BellAlertIcon size={30} color="#00ccbb" />
+                    <Text className='text-black-700  font-light text-xl'>Thông báo</Text>
                 </TouchableOpacity>
 
                 <TouchableOpacity style={{ marginTop: 25, flexDirection: 'row' }} onPress={() => { }}>

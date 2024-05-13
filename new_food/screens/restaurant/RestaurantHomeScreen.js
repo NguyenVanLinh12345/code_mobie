@@ -6,6 +6,7 @@ import RestaurantView from "./RestaurantView";
 import RestaurantMess from './RestaurantMess';
 import RestaurantReview from './RestaurantReview';
 import RestaurantOrder from './RestaurantOrder';
+import ResNotify from "./ResNotify";
 
 function RestaurantHomeScreen({ route, navigation }) {
     // const { params: { id, imgUrl, title, rating, genre, address, short_description, dishes, long, lat }, } = route;
@@ -65,7 +66,7 @@ function RestaurantHomeScreen({ route, navigation }) {
                     <Text style={styles.itemText}>Ưu Đãi</Text>
                 </TouchableOpacity>
 
-                <TouchableOpacity onPress={() => { }} style={styles.item} >
+                <TouchableOpacity onPress={() => {changeMainView(<ResNotify />)}} style={styles.item} >
                     <BellAlertIcon size={30} color="#00ccbb" />
                     <Text style={styles.itemText}>Thông báo</Text>
                 </TouchableOpacity>
