@@ -55,7 +55,7 @@ function ResOrderForRes({ orderId = "", orders = [], name, address, state = 1, r
                 &&
                 <View className="flex-row mt-2 justify-around	">
                     {
-                        thisState < 1
+                        thisState <= 1
                         &&
                         <TouchableOpacity className="p-1 rounded" style={{ backgroundColor: thisState === 2 ? "lightblue" : "lightgray" }} onPress={() => changeState(2)}>
                             <Text>Đã xác nhận</Text>

@@ -27,8 +27,7 @@ function ResNotify() {
                     }
                 </ScrollView>
             </View>
-
         </View>
     )
 };
-export default ResNotify
+export default ResNotify;

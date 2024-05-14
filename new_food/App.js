@@ -40,7 +40,7 @@ export default function App() {
             <Stack.Screen name="Delivery" component={DeliveryScreen} options={{ headerShown: false, }} />
             <Stack.Screen name="OrderList" options={{headerShown: false}} component={OrderListScreen} />
             <Stack.Screen name="OrderDetail" component={OrderDetailScreen} />
-            <Stack.Screen name="RestaurantHome" component={RestaurantHomeScreen} />
+            <Stack.Screen name="RestaurantHome" options={{headerShown: false}} component={RestaurantHomeScreen} />
             <Stack.Screen name="RestaurantChat" component={RestaurantChatScreen} />
             <Stack.Screen name="PeriodicDish" options={{ headerShown: false }} component={PeriodicDishScreen} />
             <Stack.Screen name="CustomerChat" component={CustomerChatScreen} />

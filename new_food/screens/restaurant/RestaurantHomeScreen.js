@@ -1,6 +1,6 @@
 import { View, StyleSheet, Text, TouchableOpacity } from "react-native";
-import { useLayoutEffect } from "react";
-import { useRef, useState, useEffect } from "react";
+// import { useLayoutEffect } from "react";
+import { useState } from "react";
 import { ArrowLeftIcon, BuildingStorefrontIcon, Cog6ToothIcon, GiftIcon, NewspaperIcon, ChatBubbleLeftEllipsisIcon, BellAlertIcon, ArchiveBoxArrowDownIcon, PowerIcon } from "react-native-heroicons/solid";
 import RestaurantView from "./RestaurantView";
 import RestaurantMess from './RestaurantMess';
@@ -13,11 +13,11 @@ function RestaurantHomeScreen({ route, navigation }) {
     const [mainView, setMainView] = useState(RestaurantView);
     const [sidebarState, setSidebarState] = useState(false);
 
-    useLayoutEffect(() => {
-        navigation.setOptions({
-            headerShown: false,
-        });
-    }, []);
+    // useLayoutEffect(() => {
+    //     navigation.setOptions({
+    //         headerShown: false,
+    //     });
+    // }, []);
 
     const changeMainView = (newView) => {
         setMainView(newView);
@@ -66,7 +66,7 @@ function RestaurantHomeScreen({ route, navigation }) {
                     <Text style={styles.itemText}>Ưu Đãi</Text>
                 </TouchableOpacity>
 
-                <TouchableOpacity onPress={() => {changeMainView(ResNotify)}} style={styles.item} >
+                <TouchableOpacity onPress={() => {changeMainView(<ResNotify />)}} style={styles.item} >
                     <BellAlertIcon size={30} color="#00ccbb" />
                     <Text style={styles.itemText}>Thông báo</Text>
                 </TouchableOpacity>

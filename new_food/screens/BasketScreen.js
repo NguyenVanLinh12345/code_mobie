@@ -133,7 +133,7 @@ const BasketScreen = ({ navigation }) => {
   }
 
   return (
-    <SafeAreaView className="flex-1 bg-white relative">
+    <SafeAreaView className="flex-1 bg-gray relative">
       <ScrollView>
 
         <View style={{ backgroundColor: "rgba(0,0,0, 0.4)" }} className={`${timeState && "hidden"} absolute top-0 left-0 bottom-0 right-0 z-10 items-center justify-center`}>

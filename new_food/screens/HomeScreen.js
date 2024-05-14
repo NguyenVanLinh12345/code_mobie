@@ -48,7 +48,7 @@ const HomeScreen = () => {
 
         {/* search bar */}
         <View className="flex-row mx-4 items-center space-x-2 pb-2">
-          <View className="flex-row space-x-2 flex-1 bg-gray-200 p-3 rounded-md">
+          <View style={{backgroundColor: '#e5e7eb'}} className="flex-row space-x-2 flex-1 bg-gray-100 p-3 rounded-md">
             <MagnifyingGlassIcon color="gray" />
             <TextInput placeholder="Tìm nhà hàng hoặc món ăn" keyboardType="default" />
           </View>

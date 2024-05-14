@@ -1,4 +1,4 @@
-const machineIP = "192.168.2.14";
+const machineIP = "10.20.108.104";
 
 const gatewayBaseAPI = `http://${machineIP}:8000`;
 const reviewBaseAPI = `http://${machineIP}:5001`;
